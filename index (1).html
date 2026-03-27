@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pooja Barola | AI & Automation Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #050810;
+    --surface: #0c1120;
+    --surface2: #111827;
+    --accent: #00e5ff;
+    --accent2: #7b61ff;
+    --accent3: #ff6b6b;
+    --text: #e8eaf6;
+    --muted: #6b7a99;
+    --border: rgba(0,229,255,0.12);
+    --glow: 0 0 40px rgba(0,229,255,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── GRID LINES ─── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .orb-1 { width: 500px; height: 500px; background: rgba(0,229,255,0.08); top: -100px; right: -100px; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(123,97,255,0.07); bottom: -50px; left: -50px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+    animation: fadeUp 0.6s ease both;
+  }
+  .badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--muted);
+    margin-top: 1rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-title em { color: var(--accent2); font-style: normal; }
+
+  .hero-desc {
+    max-width: 560px;
+    font-size: 1.05rem;
+    color: #8892aa;
+    margin-top: 1.5rem;
+    line-height: 1.8;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 30px rgba(0,229,255,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,229,255,0.5); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+
+  .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 6rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  .section-title span { color: var(--accent); }
+
+  /* ─── SKILLS ─── */
+  #skills { background: var(--surface); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .skill-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); box-shadow: var(--glow); }
+  .skill-card:hover::before { transform: scaleX(1); }
+
+  .skill-card-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .skill-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+    letter-spacing: 0.03em;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    background: rgba(0,229,255,0.05);
+    border: 1px solid rgba(0,229,255,0.1);
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    padding-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  .timeline-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: #7a8499;
+    line-height: 1.8;
+  }
+
+  .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .timeline-bullets li {
+    font-size: 0.88rem;
+    color: #7a8499;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .timeline-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 0.2rem;
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--surface); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.03) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: rgba(0,229,255,0.25); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow); }
+  .project-card:hover::after { opacity: 1; }
+
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+  .project-icon { font-size: 2rem; }
+  .project-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+    border: 1px solid rgba(123,97,255,0.3);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: #6b7a99;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .project-impact {
+    background: rgba(0,229,255,0.05);
+    border-left: 2px solid var(--accent);
+    padding: 0.6rem 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    text-align: center;
+    padding: 8rem 4rem;
+    position: relative;
+  }
+
+  .contact-orb {
+    position: absolute;
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 70%);
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .contact-inner { position: relative; z-index: 1; }
+
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.05); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── EDUCATION ─── */
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .edu-school {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .edu-meta {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+  .edu-cgpa {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-top: 0.2rem;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text { font-size: 1rem; color: #7a8499; line-height: 1.9; }
+  .about-text p + p { margin-top: 1.2rem; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+
+  .about-terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .terminal-bar {
+    background: #1a2235;
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .td-red { background: #ff6b6b; }
+  .td-yellow { background: #ffd93d; }
+  .td-green { background: #6bcb77; }
+
+  .terminal-body { padding: 1.5rem; line-height: 2; }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text); }
+  .t-output { color: var(--muted); padding-left: 1rem; }
+  .t-highlight { color: var(--accent2); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    #about { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  /* Scroll animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PB_</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Open to opportunities
+  </div>
+
+  <h1 class="hero-name">Pooja<br/><span>Barola</span></h1>
+  <p class="hero-title">AI & Automation Engineer <em>//</em> Workflow Orchestration</p>
+  <p class="hero-desc">
+    Building intelligent systems that automate the complex. From n8n orchestrations to AI voice agents — I turn workflows into competitive advantages.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">↓ View Work</a>
+    <a href="mailto:poojabarola78537@gmail.com" class="btn-outline">Get in Touch</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-number">15+</span>
+      <span class="stat-label">Automations Built</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">70%</span>
+      <span class="stat-label">Manual Work Reduced</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">3+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="section-tag">// 01 — About</div>
+    <h2 class="section-title">Engineer who<br/><span>builds systems</span><br/>that think</h2>
+    <div class="about-text">
+      <p>I'm an <strong>AI and Automation Engineer</strong> with hands-on experience designing scalable, production-ready workflows using n8n, Python, and JavaScript. I specialize in making systems that work 24/7 so teams don't have to.</p>
+      <p>From <strong>AI voice agents</strong> that book appointments to <strong>CRM automation pipelines</strong> that score leads in real-time — I focus on business impact first, technology second.</p>
+      <p>Currently at <strong>Viaanmed Software Solutions</strong>, building AI automation for US-based clients across healthcare, eCommerce, and real estate.</p>
+    </div>
+  </div>
+
+  <div class="about-terminal reveal">
+    <div class="terminal-bar">
+      <span class="term-dot td-red"></span>
+      <span class="term-dot td-yellow"></span>
+      <span class="term-dot td-green"></span>
+      <span style="color:var(--muted);font-size:0.7rem;margin-left:0.5rem;">pooja@portfolio ~ </span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">$ </span><span class="t-cmd">whoami</span></div>
+      <div class="t-output">Pooja Barola — AI & Automation Engineer</div>
+      <br/>
+      <div><span class="t-prompt">$ </span><span class="t-cmd">cat skills.txt</span></div>
+      <div class="t-output"><span class="t-highlight">core:</span> n8n, Python, JavaScript</div>
+      <div class="t-output"><span class="t-highlight">ai:</span> OpenAI, Retell AI, Vapi, Bolna.ai</div>
+      <div class="t-output"><span class="t-highlight">crm:</span> GoHighLevel, Zoho, HubSpot</div>
+      <div class="t-output"><span class="t-highlight">infra:</span> AWS, Docker, Firebase</div>
+      <br/>
+      <div><span class="t-prompt">$ </span><span class="t-cmd">cat impact.txt</span></div>
+      <div class="t-output">↓ manual work by 70%</div>
+      <div class="t-output">↑ lead response time to &lt;5 sec</div>
+      <div class="t-output">500+ students mentored</div>
+      <br/>
+      <div><span class="t-prompt">$ </span><span class="t-cmd"><span style="animation:fadeIn 0.5s 3s both;display:inline-block;">_</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">// 02 — Skills</div>
+  <h2 class="section-title">Technical <span>Arsenal</span></h2>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🤖</div>
+      <div class="skill-card-title">AI & Automation</div>
+      <div class="skill-tags">
+        <span class="skill-tag">n8n</span>
+        <span class="skill-tag">Make (Integromat)</span>
+        <span class="skill-tag">Zapier</span>
+        <span class="skill-tag">OpenAI API</span>
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">LangChain</span>
+        <span class="skill-tag">LLM Workflows</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🗣️</div>
+      <div class="skill-card-title">AI Voice Agents</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Retell AI</span>
+        <span class="skill-tag">Vapi</span>
+        <span class="skill-tag">Bolna.ai</span>
+        <span class="skill-tag">Twilio</span>
+        <span class="skill-tag">Voice Automation</span>
+        <span class="skill-tag">Appointment Booking</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">💼</div>
+      <div class="skill-card-title">CRM & Business Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">GoHighLevel</span>
+        <span class="skill-tag">Zoho CRM</span>
+        <span class="skill-tag">HubSpot</span>
+        <span class="skill-tag">ClickUp</span>
+        <span class="skill-tag">Google Calendar</span>
+        <span class="skill-tag">Google Sheets</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">⚡</div>
+      <div class="skill-card-title">Languages & Frameworks</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">Selenium</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">☁️</div>
+      <div class="skill-card-title">Cloud & Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Self-hosted n8n</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Postman</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🗄️</div>
+      <div class="skill-card-title">Databases & Data</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">Firebase Firestore</span>
+        <span class="skill-tag">ChromaDB</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Web Scraping</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">// 03 — Experience</div>
+  <h2 class="section-title">Where I've <span>Built</span></h2>
+
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div>
+        <div class="timeline-date">Nov 2025 — Present</div>
+        <div class="timeline-company">Viaanmed Software Solutions Pvt Ltd</div>
+        <div class="timeline-company" style="margin-top:0.2rem;color:var(--accent2);">On-site · Full Time</div>
+      </div>
+      <div>
+        <div class="timeline-role">AI Developer</div>
+        <ul class="timeline-bullets">
+          <li>Designed and developed complex n8n workflows for end-to-end business automation, integrating Retell AI, multiple APIs, and web-based data sources.</li>
+          <li>Built and deployed AI voice agents for multiple US-based clients — covering appointment booking, customer support, and eCommerce service automation.</li>
+          <li>Self-hosted n8n on AWS, handling infrastructure setup, Docker configuration, and workflow backup systems for production reliability.</li>
+          <li>Contributed to data pipeline automation and workflow monitoring processes at scale.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div>
+        <div class="timeline-date">July 2025 — Oct 2025</div>
+        <div class="timeline-company">CodeStore Technologies Pvt. Ltd</div>
+        <div class="timeline-company" style="margin-top:0.2rem;color:var(--accent2);">On-site · Internship</div>
+      </div>
+      <div>
+        <div class="timeline-role">Software Engineer Trainee</div>
+        <ul class="timeline-bullets">
+          <li>Built and deployed AI automation workflows using n8n, APIs, and web scraping — reducing manual intervention by 40%.</li>
+          <li>Designed prompt engineering strategies for LLM-based automations, improving contextual response accuracy.</li>
+          <li>Developed multi-agent systems combining n8n, Selenium, GitHub Copilot, and REST APIs for autonomous data handling.</li>
+          <li>Collaborated with teams to translate client requirements into efficient, production-ready AI systems.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div>
+        <div class="timeline-date">Aug 2023 — June 2024</div>
+        <div class="timeline-company">WeCode</div>
+        <div class="timeline-company" style="margin-top:0.2rem;color:var(--accent2);">On-site · Intern</div>
+      </div>
+      <div>
+        <div class="timeline-role">Teaching Assistant Intern</div>
+        <ul class="timeline-bullets">
+          <li>Mentored 500+ students in front-end technologies (HTML, CSS, JS) through structured assignments and live sessions.</li>
+          <li>Organized coding contests with 1,000+ participants, designed challenges, and conducted evaluations.</li>
+          <li>Enhanced training modules and initiated group projects to improve student engagement and real-world learning outcomes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">// 04 — Projects</div>
+  <h2 class="section-title">Things I've <span>Shipped</span></h2>
+
+  <div class="projects-grid">
+
+    <!-- AI Lead Qualification -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🎯</div>
+        <span class="project-badge">n8n · Zoho · AI</span>
+      </div>
+      <div class="project-name">AI-Powered Lead Qualification & Sales Automation</div>
+      <div class="project-desc">Webhook-triggered n8n workflow that scores incoming leads as hot/warm/cold using OpenAI. Hot leads get instant WhatsApp notification + Zoho CRM assignment; warm leads enter email nurturing; cold leads enter long-term campaigns. Upsert logic handles duplicates cleanly.</div>
+      <div class="project-impact">↓ response time to &lt;5 seconds · ↑ conversion rate</div>
+      <div class="project-stack">
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">Zoho CRM</span>
+        <span class="stack-tag">OpenAI API</span>
+        <span class="stack-tag">WhatsApp</span>
+        <span class="stack-tag">Email Automation</span>
+      </div>
+    </div>
+
+    <!-- Multi-Channel Automation -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">📨</div>
+        <span class="project-badge">Multi-Channel · CRM</span>
+      </div>
+      <div class="project-name">Multi-Channel WhatsApp + Email Automation System</div>
+      <div class="project-desc">End-to-end lead nurturing pipeline integrated with Zoho CRM. On signup, users receive instant welcome messages via both WhatsApp and email. A 5-day drip sequence (Day 1 intro, Day 2 WhatsApp reminder, Day 3 personalized offer, Day 5 final follow-up) runs fully on autopilot. AI generates personalized messages per user behavior.</div>
+      <div class="project-impact">Consistent follow-ups · Zero manual effort · High-intent alerts to sales team</div>
+      <div class="project-stack">
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">Zoho CRM</span>
+        <span class="stack-tag">WhatsApp</span>
+        <span class="stack-tag">OpenAI</span>
+        <span class="stack-tag">Email</span>
+      </div>
+    </div>
+
+    <!-- Eco Wine -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🍷</div>
+        <span class="project-badge">Voice AI · GHL · n8n</span>
+      </div>
+      <div class="project-name">Eco Wine AI Automation System</div>
+      <div class="project-desc">Full lead-to-appointment pipeline for an Eco Wine company. Leads captured via GoHighLevel funnels trigger n8n workflows. Retell AI voice agent calls and qualifies leads automatically. Interested leads get Google Calendar appointments booked, CRM status updated, and ClickUp tasks created for the sales team.</div>
+      <div class="project-impact">↓ manual effort by 70% · Instant lead response time</div>
+      <div class="project-stack">
+        <span class="stack-tag">GoHighLevel</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">Retell AI</span>
+        <span class="stack-tag">Google Calendar</span>
+        <span class="stack-tag">ClickUp</span>
+        <span class="stack-tag">Twilio</span>
+      </div>
+    </div>
+
+    <!-- AI Customer Support -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">💬</div>
+        <span class="project-badge">Support Automation</span>
+      </div>
+      <div class="project-name">AI Customer Support Agent</div>
+      <div class="project-desc">24/7 AI-powered support agent built on GoHighLevel chat widget + n8n + OpenAI. Classifies incoming messages (FAQ / pricing / complaint), generates contextual replies, and sends responses via GHL SMS/chat. Complex queries auto-escalate to human agents in GHL with full conversation context.</div>
+      <div class="project-impact">↓ support workload by ~60% · 24/7 availability</div>
+      <div class="project-stack">
+        <span class="stack-tag">GoHighLevel</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">OpenAI</span>
+        <span class="stack-tag">SMS Automation</span>
+      </div>
+    </div>
+
+    <!-- AI Appointment Booking -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🏥</div>
+        <span class="project-badge">Healthcare · Booking AI</span>
+      </div>
+      <div class="project-name">AI Appointment Booking Agent (Healthcare)</div>
+      <div class="project-desc">Automated patient appointment system for clinics. AI agent collects preferred date, doctor type, and symptoms via conversation, then books the slot in Google Calendar. Confirmation SMS + email sent instantly via GHL. Automated reminders at 24-hour and 2-hour marks dramatically reduced no-shows.</div>
+      <div class="project-impact">↓ no-shows · Fully automated booking flow</div>
+      <div class="project-stack">
+        <span class="stack-tag">GoHighLevel</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">Google Calendar</span>
+        <span class="stack-tag">SMS/Email</span>
+        <span class="stack-tag">AI Conversation</span>
+      </div>
+    </div>
+
+    <!-- eCommerce Recovery -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🛍️</div>
+        <span class="project-badge">eCommerce · Recovery</span>
+      </div>
+      <div class="project-name">eCommerce AI Follow-Up & Cart Recovery System</div>
+      <div class="project-desc">Abandoned cart recovery engine that triggers when a user leaves without purchasing. OpenAI generates personalized messages based on the specific product and user behavior. Sequential follow-ups via SMS (Twilio) and email, with conditional logic — clicked links mark lead as "Interested" and trigger offers, non-responders get escalated re-engagement.</div>
+      <div class="project-impact">↑ conversion rate · Automated revenue recovery</div>
+      <div class="project-stack">
+        <span class="stack-tag">GoHighLevel</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">OpenAI</span>
+        <span class="stack-tag">Twilio</span>
+        <span class="stack-tag">Conditional Logic</span>
+      </div>
+    </div>
+
+    <!-- Real Estate Lead Nurturing -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">🏡</div>
+        <span class="project-badge">Real Estate · AI Agent</span>
+      </div>
+      <div class="project-name">Real Estate AI Lead Nurturing Agent</div>
+      <div class="project-desc">Automated property buyer qualification system built on GHL funnels + n8n + OpenAI. AI extracts budget, location, and property type from lead data, recommends matching listings, and sends property details via SMS/email. Hot leads with high intent automatically get site visit booking links triggered.</div>
+      <div class="project-impact">↓ manual follow-ups by 70% · Faster qualification</div>
+      <div class="project-stack">
+        <span class="stack-tag">GoHighLevel</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">OpenAI API</span>
+        <span class="stack-tag">Web Scraping</span>
+        <span class="stack-tag">REST APIs</span>
+      </div>
+    </div>
+
+    <!-- Social Media Lead -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">📱</div>
+        <span class="project-badge">Social · DM Automation</span>
+      </div>
+      <div class="project-name">Social Media Lead Automation Agent</div>
+      <div class="project-desc">Instagram/Facebook DM automation system that responds to incoming messages 24/7. AI classifies message intent (inquiry / pricing / demo request) and generates intelligent replies. Leads are auto-stored in GoHighLevel CRM and assigned to the correct pipeline stage based on intent classification.</div>
+      <div class="project-impact">24/7 DM responses · Zero missed leads</div>
+      <div class="project-stack">
+        <span class="stack-tag">GoHighLevel</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">OpenAI</span>
+        <span class="stack-tag">Instagram API</span>
+        <span class="stack-tag">Facebook API</span>
+      </div>
+    </div>
+
+    <!-- LexifyAI -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">⚖️</div>
+        <span class="project-badge">LLM · RAG · Python</span>
+      </div>
+      <div class="project-name">LexifyAI — AI-Powered Legal Assistant</div>
+      <div class="project-desc">AI chatbot for understanding Indian legal queries based on recent IPC-to-BNS law changes. Built with LangChain, ChromaDB for vector search, and Llama for NLP. Interactive conversational UI in Streamlit with session state management and dynamic response rendering with cited sources.</div>
+      <div class="project-impact">Real-time legal query responses · NLP-powered</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">LangChain</span>
+        <span class="stack-tag">ChromaDB</span>
+        <span class="stack-tag">Llama</span>
+        <span class="stack-tag">PyPDF2</span>
+        <span class="stack-tag">Streamlit</span>
+      </div>
+    </div>
+
+    <!-- Chat App -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-icon">💬</div>
+        <span class="project-badge">React · Firebase</span>
+      </div>
+      <div class="project-name">Real-Time Chat Application</div>
+      <div class="project-desc">Full-featured real-time chat app with instant messaging and multi-user support. Firebase Authentication for secure login, Firestore listeners for real-time updates without page reloads. Features real-time typing indicators, last-seen status, and a fully responsive UI built with React hooks and Context API.</div>
+      <div class="project-impact">Multi-user · Real-time · No-reload updates</div>
+      <div class="project-stack">
+        <span class="stack-tag">React.js</span>
+        <span class="stack-tag">Firebase Firestore</span>
+        <span class="stack-tag">Firebase Auth</span>
+        <span class="stack-tag">React Hooks</span>
+        <span class="stack-tag">Context API</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-tag">// 05 — Education</div>
+  <h2 class="section-title">Academic <span>Foundation</span></h2>
+  <div class="edu-card reveal">
+    <div>
+      <div class="edu-degree">B.Tech. in Computer Science</div>
+      <div class="edu-school">Graphic Era Hill University, Bhimtal · Aug 2021 – July 2025</div>
+    </div>
+    <div class="edu-meta">
+      <div>CGPA</div>
+      <div class="edu-cgpa">8.56</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-orb"></div>
+  <div class="contact-inner">
+    <div class="section-tag" style="margin-bottom:1rem;">// 06 — Contact</div>
+    <h2 class="contact-title">Let's Build<br/><span style="color:var(--accent)">Something</span></h2>
+    <p class="contact-sub">Open to freelance projects, full-time roles, and interesting automation challenges.</p>
+    <div class="contact-links">
+      <a href="mailto:poojabarola78537@gmail.com" class="contact-link">📧 Email Me</a>
+      <a href="tel:+919568858362" class="contact-link">📞 +91 9568858362</a>
+      <a href="https://www.linkedin.com/in/pooja-barola" target="_blank" class="contact-link">🔗 LinkedIn</a>
+      <a href="https://github.com/poojabarola" target="_blank" class="contact-link">💻 GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Pooja Barola</span>
+  <span>Built with precision · AI & Automation Engineer</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger project cards
+  document.querySelectorAll('.project-card').forEach((card, i) => {
+    card.style.transitionDelay = `${(i % 3) * 0.08}s`;
+  });
+</script>
+</body>
+</html>
